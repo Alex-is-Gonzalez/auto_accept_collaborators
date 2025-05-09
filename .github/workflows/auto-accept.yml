@@ -16,4 +16,4 @@ jobs:
       - name: Auto Accept Collabs
         uses: kbrashears5/github-action-auto-accept-collabs@v1.0.0
         with:
-          TOKEN: ${{ secrets.ACTIONS }}
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
