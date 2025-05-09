@@ -1,29 +1,19 @@
-name: Auto Accept Invitations
+name: Auto Accept Collabs
 
 on:
+  push:
+    branches:
+      - master
   schedule:
-    - cron: '*/5 * * * *' # Runs every 5 minutes
+    - cron: 0 0 * * *
 
 jobs:
-  accept_invites:
+  file_sync:
     runs-on: ubuntu-latest
     steps:
-    - name: Auto Accept Repository Invitations
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        # Fetch pending invitations
-        response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-          -H "Accept: application/vnd.github+json" \
-          https://api.github.com/user/repository_invitations)
-
-        # Loop through each invitation and accept it
-        echo "$response" | jq -c '.[]' | while read -r invitation; do
-          id=$(echo "$invitation" | jq '.id')
-          echo "Accepting invitation ID: $id"
-          curl -X PATCH \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/user/repository_invitations/$id
-        done
-
+      - name: Fetching Local Repository
+        uses: actions/checkout@master
+      - name: Auto Accept Collabs
+        uses: kbrashears5/github-action-auto-accept-collabs@v1.0.0
+        with:
+          TOKEN: ${{ secrets.ACTIONS }}
