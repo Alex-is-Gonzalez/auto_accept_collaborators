@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Auto Accept Collabs
-        uses: kbrashears5/github-action-auto-accept-collabs@v1.0.0
+        uses: kbrashears5/github-action-auto-accept-collabs@v2.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
