@@ -5,8 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '*/5 * * * *'
-
+    - cron: '0 0 * * *'
 jobs:
   file_sync:
     runs-on: ubuntu-latest
